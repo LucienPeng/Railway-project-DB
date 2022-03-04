@@ -42,7 +42,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Well connected");
+  res.send("Welcome, vous êtes bien connecté !!!!!");
 });
 
 //Find All Data
