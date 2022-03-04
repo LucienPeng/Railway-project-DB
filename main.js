@@ -9,7 +9,8 @@ const app = express();
 const username = encodeURIComponent("lucien");
 const password = encodeURIComponent("/nxfl7zp");
 const database = encodeURIComponent("TW_Railway");
-const uri = `mongodb+srv://${username}:${password}@lucien-db.vk4rb.mongodb.net/${database}?retryWrites=true&w=majority`;
+//const uri = `mongodb+srv://${username}:${password}@lucien-db.vk4rb.mongodb.net/${database}?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {
