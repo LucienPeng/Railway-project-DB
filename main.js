@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 app.get("/entrance", async (req, res) => {
   try {
     let data = await Entrance.find({});
-    res.send(data);
+    await res.send(data);
   } catch (e) {
     console.log(e);
   }
