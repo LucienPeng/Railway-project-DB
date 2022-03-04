@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 });
 
 //Find All Data
-app.get("/entrance", async (req, res) => {
+app.get("/all", async (req, res) => {
   try {
     let data = await Entrance.find({});
     await res.send(data);
@@ -56,10 +56,20 @@ app.get("/entrance", async (req, res) => {
   }
 });
 
-app.get("/entrance/:staName", async (req, res) => {
+app.get("/stationName/:staName", async (req, res) => {
   let { staName } = req.params;
   try {
     let data = await Entrance.find({ staName });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+app.get("/date/:trnOpDate", async (req, res) => {
+  let { trnOpDate } = req.params;
+  try {
+    let data = await Entrance.find({ trnOpDate });
     res.send(data);
   } catch (e) {
     console.log(e);
