@@ -46,25 +46,25 @@ app.get("/", (req, res) => {
   res.send("Welcome, vous êtes bien connecté !!!!!");
 });
 
-//Find All Data
-// app.get("/entrance", async (req, res) => {
-//   try {
-//     let data = await Entrance.find({});
-//     res.send(data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
+Find All Data
+app.get("/entrance", async (req, res) => {
+  try {
+    let data = await Entrance.find({});
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
-// app.get("/entrance/:staName", async (req, res) => {
-//   let { staName } = req.params;
-//   try {
-//     let data = await Entrance.find({ staName });
-//     res.send(data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
+app.get("/entrance/:staName", async (req, res) => {
+  let { staName } = req.params;
+  try {
+    let data = await Entrance.find({ staName });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 // app.post("/entrance", async (req, res) => {
 //   for (let i = 0; i < data.length; i++) {
