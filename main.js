@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
   res.send("Welcome, vous êtes bien connecté !!!!!");
 });
 
-Find All Data
+//Find All Data
 app.get("/entrance", async (req, res) => {
   try {
     let data = await Entrance.find({});
