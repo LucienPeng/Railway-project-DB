@@ -77,9 +77,15 @@ app.get("/allSta", async (req, res) => {
 });
 
 //日期選單
-app.get("/date", async (req, res) => {
+app.get("/allDate", async (req, res) => {
   try {
-    let data = await Entrance.find({}, { trnOpDate: 1, _id: 0 }).limit(397);
+    let data = await Entrance.find({}, { trnOpDate: 1, _id: 0 });
+
+    const set = new Set();
+    data = data.filter((item) =>
+      !set.has(item.trnOpDate) ? set.add(item.trnOpDate) : false
+    );
+
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
