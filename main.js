@@ -43,7 +43,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Welcome, vous êtes bien connecté !!!!!");
+  res.send("Welcome, 資料庫已連接！");
 });
 
 //Find All Data
@@ -70,6 +70,26 @@ app.get("/date/:trnOpDate", async (req, res) => {
   let { trnOpDate } = req.params;
   try {
     let data = await Entrance.find({ trnOpDate });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+app.get("/:staName/:trnOpDate", async (req, res) => {
+  let { staName, trnOpDate } = req.params;
+  try {
+    let data = await Entrance.find({ trnOpDate: trnOpDate, staName: staName });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+app.get("/:staName/jan/:trnOpDate", async (req, res) => {
+  let { staName, trnOpDate } = req.params;
+  try {
+    let data = await Entrance.find({ staName: staName}, {trnOpDate: {$lte 20210101} });
     res.send(data);
   } catch (e) {
     console.log(e);
