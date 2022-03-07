@@ -86,15 +86,18 @@ app.get("/:staName/:trnOpDate", async (req, res) => {
   }
 });
 
-// app.get("/:staName/jan/:trnOpDate", async (req, res) => {
-//   let { staName, trnOpDate } = req.params;
-//   try {
-//     let data = await Entrance.find({ staName: staName}, {trnOpDate: {$lte 20210101} });
-//     res.send(data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
+app.get("/:staName/:trnOpDate1/:trnOpDate2", async (req, res) => {
+  let { staName, trnOpDate1, trnOpDate2 } = req.params;
+  try {
+    let data = await Entrance.find({
+      staName: staName,
+      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
+    });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 // app.post("/entrance", async (req, res) => {
 //   for (let i = 0; i < data.length; i++) {
