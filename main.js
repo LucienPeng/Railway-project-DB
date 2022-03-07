@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 app.get("/all", async (req, res) => {
   try {
     let data = await Entrance.find({});
-    await res.send(data);
+    await res.status(200).send(data);
   } catch (e) {
     console.log(e);
   }
@@ -60,12 +60,33 @@ app.get("/stationName/:staName", async (req, res) => {
   let { staName } = req.params;
   try {
     let data = await Entrance.find({ staName });
-    res.send(data);
+    res.status(200).send(data);
   } catch (e) {
     console.log(e);
   }
 });
 
+//車站選單
+app.get("/allSta", async (req, res) => {
+  try {
+    let data = await Entrance.find({}, { staName: 1, _id: 0 }).limit(239);
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//日期選單
+app.get("/date", async (req, res) => {
+  try {
+    let data = await Entrance.find({}, { trnOpDate: 1, _id: 0 }).limit(397);
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//所有車站特定日期
 app.get("/date/:trnOpDate", async (req, res) => {
   let { trnOpDate } = req.params;
   try {
@@ -76,6 +97,7 @@ app.get("/date/:trnOpDate", async (req, res) => {
   }
 });
 
+//特定車站的特定日期
 app.get("/:staName/:trnOpDate", async (req, res) => {
   let { staName, trnOpDate } = req.params;
   try {
@@ -86,6 +108,7 @@ app.get("/:staName/:trnOpDate", async (req, res) => {
   }
 });
 
+//特定車站的區間日期
 app.get("/:staName/:trnOpDate1/:trnOpDate2", async (req, res) => {
   let { staName, trnOpDate1, trnOpDate2 } = req.params;
   try {
