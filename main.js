@@ -116,10 +116,23 @@ app.get("/:staName/:trnOpDate", async (req, res) => {
 
 //特定車站的區間日期
 app.get("/:staName/:trnOpDate1/:trnOpDate2", async (req, res) => {
-  let { staName, trnOpDate1, trnOpDate2 } = req.params;
+  let { trnOpDate1, trnOpDate2, staName } = req.params;
   try {
     let data = await Entrance.find({
+      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
       staName: staName,
+    });
+    res.send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//特定車站的區間日期
+app.get("/:staName/:staCode/:trnOpDate1/:trnOpDate2", async (req, res) => {
+  let { trnOpDate1, staCode, trnOpDate2, staName } = req.params;
+  try {
+    let data = await Entrance.find({
       trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
     });
     res.send(data);
@@ -127,6 +140,20 @@ app.get("/:staName/:trnOpDate1/:trnOpDate2", async (req, res) => {
     console.log(e);
   }
 });
+
+// //特定車站的區間日期
+// app.get("/date", async (req, res) => {
+//   let { trnOpDate } = req.params;
+//   try {
+//     let data = await Entrance.find({
+//       //staName: staName,
+//       trnOpDate: { $gte: 20220101, $lte: 20220104 },
+//     });
+//     res.send(data);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 // app.post("/entrance", async (req, res) => {
 //   for (let i = 0; i < data.length; i++) {
@@ -150,5 +177,5 @@ app.get("/:staName/:trnOpDate1/:trnOpDate2", async (req, res) => {
 // });
 
 app.listen(process.env.PORT || 3000, () =>
-  console.log("Server is running...QUE DIEU SOIT AVEC NOUS!!!!")
+  console.log("Server is running...QUE DIEU SOIT AVEC NOUS!!!!AMEN")
 );
