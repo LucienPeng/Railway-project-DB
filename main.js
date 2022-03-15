@@ -1,7 +1,9 @@
-const data = require("./models/data.js");
-const Entrance = require("./models/schema.js");
+const data = require("./modules/data.js");
+const line = require("./modules/line.js");
+const Entrance = require("./modules/schema.js");
 
 const express = require("express");
+const router = express.Router();
 const mongoose = require("mongoose");
 
 const app = express();
@@ -46,6 +48,9 @@ app.get("/", (req, res) => {
   res.send("Welcome, 資料庫已連接！");
 });
 
+//Line
+app.use("/line", line);
+
 //Find All Data
 app.get("/all", async (req, res) => {
   try {
@@ -87,6 +92,19 @@ app.get("/allDate", async (req, res) => {
     );
 
     res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//區間日期內車站的所有資料
+app.get("/:trnOpDate1/:trnOpDate2", async (req, res) => {
+  let { trnOpDate1, trnOpDate2 } = req.params;
+  try {
+    let data = await Entrance.find({
+      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
+    });
+    res.send(data);
   } catch (e) {
     console.log(e);
   }
