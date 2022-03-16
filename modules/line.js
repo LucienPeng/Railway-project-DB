@@ -116,12 +116,48 @@ router.get("/south/:trnOpDate1/:trnOpDate2", async (req, res) => {
   }
 });
 
-//區間日期內東部幹線的所有資料
-router.get("/east/:trnOpDate1/:trnOpDate2", async (req, res) => {
+//區間日期內東部幹線（台東）的所有資料
+router.get("/east-taitung/:trnOpDate1/:trnOpDate2", async (req, res) => {
   let { trnOpDate1, trnOpDate2 } = req.params;
   try {
     let data = await Entrance.find({
-      staCode: { $gte: 6000, $lte: 7360 },
+      staCode: { $gte: 6000, $lte: 6070 },
+      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
+    });
+    let total = 0;
+    data.forEach((item) => {
+      total += item.gateInComingCnt;
+    });
+    res.send(`${total}`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//區間日期內東部幹線（花連）的所有資料
+router.get("/east-hualien/:trnOpDate1/:trnOpDate2", async (req, res) => {
+  let { trnOpDate1, trnOpDate2 } = req.params;
+  try {
+    let data = await Entrance.find({
+      staCode: { $gte: 6080, $lte: 7080 },
+      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
+    });
+    let total = 0;
+    data.forEach((item) => {
+      total += item.gateInComingCnt;
+    });
+    res.send(`${total}`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//區間日期內東部幹線(宜蘭)的所有資料
+router.get("/east-yilan/:trnOpDate1/:trnOpDate2", async (req, res) => {
+  let { trnOpDate1, trnOpDate2 } = req.params;
+  try {
+    let data = await Entrance.find({
+      staCode: { $gte: 7090, $lte: 7360 },
       trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
     });
     let total = 0;
