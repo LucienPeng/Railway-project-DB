@@ -1,4 +1,5 @@
 const data = require("./modules/data.js");
+const date = require("./modules/date.js");
 const line = require("./modules/line.js");
 const Entrance = require("./modules/schema.js");
 
@@ -51,6 +52,9 @@ app.get("/", (req, res) => {
 //Line
 app.use("/line", line);
 
+//date
+app.use("/date", date);
+
 //Find All Data
 app.get("/all", async (req, res) => {
   try {
@@ -92,30 +96,6 @@ app.get("/allDate", async (req, res) => {
     );
 
     res.status(200).send(data);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-//區間日期內車站的所有資料
-app.get("/:trnOpDate1/:trnOpDate2", async (req, res) => {
-  let { trnOpDate1, trnOpDate2 } = req.params;
-  try {
-    let data = await Entrance.find({
-      trnOpDate: { $gte: trnOpDate1, $lte: trnOpDate2 },
-    });
-    res.send(data);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-//所有車站特定日期
-app.get("/date/:trnOpDate", async (req, res) => {
-  let { trnOpDate } = req.params;
-  try {
-    let data = await Entrance.find({ trnOpDate });
-    res.send(data);
   } catch (e) {
     console.log(e);
   }
