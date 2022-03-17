@@ -1,7 +1,6 @@
 const data = require("./modules/data.js");
 const date = require("./modules/date.js");
 const line = require("./modules/line.js");
-const specs = require("./modules/swagger.js");
 const doc = require("./modules/openapi.json");
 
 const express = require("express");
