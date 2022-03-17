@@ -6,7 +6,7 @@ const options = {
     info: {
       title: "TW-RAIWAY DB API",
       version: "1.0.0",
-      description: "Generate TW-RAIWAY DB API API document with swagger",
+      description: "Generate TW-RAIWAY DB API document with swagger",
     },
   },
   // 這邊會是你想要產生的api文件檔案，我是直接讓swagger去列出所有controllers
