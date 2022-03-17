@@ -1,7 +1,7 @@
 const data = require("./modules/data.js");
 const date = require("./modules/date.js");
 const line = require("./modules/line.js");
-const doc = require("./modules/openapi.json");
+const specs = require("./modules/swagger.js");
 
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 });
 
 //swagger
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(doc));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 //Line
 app.use("/line", line);
