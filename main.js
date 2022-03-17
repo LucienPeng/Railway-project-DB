@@ -1,11 +1,14 @@
 const data = require("./modules/data.js");
 const date = require("./modules/date.js");
 const line = require("./modules/line.js");
-const Entrance = require("./modules/schema.js");
+const specs = require("./modules/swagger.js");
+const doc = require("./modules/openapi.json");
 
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const Entrance = require("./modules/schema.js");
 
 const app = express();
 
@@ -48,6 +51,9 @@ app.all("/*", function (req, res, next) {
 app.get("/", (req, res) => {
   res.send("Welcome, 資料庫已連接！");
 });
+
+//swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(doc));
 
 //Line
 app.use("/line", line);
